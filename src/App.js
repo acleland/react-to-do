@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import { getUser } from './services/users';
 import Auth from './views/Auth/Auth';
+import Main from './views/Main/Main';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser());
@@ -12,7 +13,8 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact to="/">
-            <Auth />
+            {!currentUser && <Auth setCurrentUser={setCurrentUser} />}
+            {currentUser && <Main />}
           </Route>
         </Switch>
       </BrowserRouter>
