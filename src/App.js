@@ -4,6 +4,7 @@ import './App.css';
 import { getUser } from './services/users';
 import Auth from './views/Auth/Auth';
 import Main from './views/Main/Main';
+import Nav from './components/Nav/Nav';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser());
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Nav {...{ currentUser, setCurrentUser }} />
         <Switch>
           <Route exact to="/">
             {!currentUser && <Auth setCurrentUser={setCurrentUser} />}

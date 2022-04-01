@@ -10,3 +10,7 @@
 .auth-toggle.selected {
   text-decoration: underline;
 }
+
+.auth-menu {
+  margin-bottom: 4rem;
+}

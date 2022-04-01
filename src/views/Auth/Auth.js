@@ -19,7 +19,6 @@ export default function Auth({ setCurrentUser }) {
     if (isSignUp) {
       try {
         const resp = await signUpUser(email, password);
-        console.log('sign up resp', resp);
         setCurrentUser(resp.email);
       } catch (e) {
         setError(e.message);
@@ -27,7 +26,6 @@ export default function Auth({ setCurrentUser }) {
     } else {
       try {
         const resp = await signInUser(email, password);
-        console.log('sign in res', resp);
         setCurrentUser(resp.email);
       } catch (e) {
         setError(e.message);
@@ -36,7 +34,7 @@ export default function Auth({ setCurrentUser }) {
   };
 
   return (
-    <div>
+    <div className="auth-page">
       <div className="auth-menu">
         <span className={isSignUp ? 'auth-toggle' : 'auth-toggle selected'} onClick={toggleAuth}>
           Sign In
