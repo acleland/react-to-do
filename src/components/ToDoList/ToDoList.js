@@ -3,7 +3,7 @@ import './ToDoList.css';
 
 export default function ToDoList({ todos, toggleToDo }) {
   return (
-    <ul>
+    <ul className="to-do-list">
       {todos.map((todo) => (
         <li key={todo.id}>
           <input
@@ -14,7 +14,9 @@ export default function ToDoList({ todos, toggleToDo }) {
               toggleToDo(todo);
             }}
           />
-          <label htmlFor={todo.id}>{todo.description}</label>
+          <label htmlFor={todo.id} className={todo.complete ? 'complete' : ''}>
+            {todo.description}
+          </label>
         </li>
       ))}
     </ul>
