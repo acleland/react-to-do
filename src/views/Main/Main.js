@@ -26,6 +26,7 @@ export default function Main() {
     return <p>Loading...</p>;
   }
 
+  // Callbacks
   const toggleToDo = async (todo) => {
     await setComplete(todo.id, !todo.complete);
     const data = await getToDos();
@@ -39,7 +40,6 @@ export default function Main() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const createdToDo = await createToDo(newToDo);
-    console.log('createdToDo', createdToDo);
     setToDos([...todos, createdToDo]);
     setNewToDo('');
   };
