@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getToDos, setComplete } from '../../services/todo';
+import { getToDos, setComplete, createToDo } from '../../services/todo';
 import ToDoList from '../../components/ToDoList/ToDoList';
 import NewToDo from '../../components/NewToDo/NewToDo';
 
@@ -7,6 +7,7 @@ export default function Main() {
   const [todos, setToDos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [newToDo, setNewToDo] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -31,9 +32,16 @@ export default function Main() {
     setToDos(data);
   };
 
+  const onChange = (e) => {
+    setNewToDo(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleSubmit called');
+    const createdToDo = await createToDo(newToDo);
+    console.log('createdToDo', createdToDo);
+    setToDos([...todos, createdToDo]);
+    setNewToDo('');
   };
 
   return (
@@ -41,7 +49,7 @@ export default function Main() {
       {error && <p>{error}</p>}
       <h1>Your To-Dos</h1>
       <ToDoList {...{ todos, toggleToDo }} />
-      <NewToDo {...{ handleSubmit }} />
+      <NewToDo {...{ handleSubmit, onChange, newToDo }} />
     </div>
   );
 }
